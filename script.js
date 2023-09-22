@@ -1,28 +1,18 @@
-const roulette = document.getElementById("roulette");
-const spinButton = document.getElementById("spinButton");
-const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
-const numSlices = colors.length;
-const angle = 360 / numSlices;
+// ... (seu código JavaScript existente)
 
-// Criação das fatias coloridas na roleta
-for (let i = 0; i < numSlices; i++) {
-    const slice = document.createElement("div");
-    slice.className = "slice";
-    slice.style.clipPath = `polygon(50% 50%, 0 0, 100% 0)`;
-    slice.style.transform = `rotate(${angle * i}deg)`;
-    slice.style.backgroundColor = colors[i];
-    roulette.appendChild(slice);
-}
+// Evento de clique no botão "Editar Opções"
+editButton.addEventListener("click", () => {
+    editOptionsContainer.style.display = "block";
+});
 
-// Função para girar a roleta
-function spinRoulette() {
-    const randomAngle = Math.floor(Math.random() * 3600) + 1800; // Gira pelo menos 5 voltas
-    roulette.style.transition = "transform 3s ease-out";
-    roulette.style.transform = `rotate(${randomAngle}deg)`;
-}
-
-// Adiciona evento de clique ao botão "ROLAR"
-spinButton.addEventListener("click", () => {
-    roulette.style.transition = "none"; // Remove a transição para evitar cliques repetidos
-    spinRoulette();
+// Evento de clique no botão "Salvar"
+saveOptionsButton.addEventListener("click", () => {
+    const option1 = document.getElementById("option1").value;
+    const option2 = document.getElementById("option2").value;
+    // Atualize as opções nas fatias da roleta
+    const slices = document.querySelectorAll(".slice");
+    slices[0].textContent = option1; // Atualize a primeira fatia
+    slices[1].textContent = option2; // Atualize a segunda fatia
+    // Adicione mais atualizações conforme necessário para cada fatia
+    editOptionsContainer.style.display = "none";
 });
