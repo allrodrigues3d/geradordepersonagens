@@ -1,6 +1,3 @@
-Peço desculpas pela confusão anterior. Parece que houve um problema com a minha resposta anterior. Aqui está o código corrigido:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,13 +29,14 @@ Peço desculpas pela confusão anterior. Parece que houve um problema com a minh
             border-radius: 50%;
             background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden; /* Esconde as partes das fatias fora do círculo */
         }
         .slice {
             position: absolute;
-            width: 0;
-            height: 0;
+            width: 100%;
+            height: 100%;
             clip-path: polygon(50% 50%, 0 0, 100% 0);
-            z-index: 1;
+            transform-origin: 50% 100%; /* Define o ponto de rotação no centro da base do triângulo */
         }
         .button-container {
             display: flex;
@@ -144,4 +142,13 @@ Peço desculpas pela confusão anterior. Parece que houve um problema com a minh
         saveOptionsButton.addEventListener("click", () => {
             const option1 = document.getElementById("option1").value;
             const option2 = document.getElementById("option2").value;
-            // Atualize as opções nas fatias
+            // Atualize as opções nas fatias da roleta
+            const slices = document.querySelectorAll(".slice");
+            slices[0].textContent = option1;
+            slices[1].textContent = option2;
+            // Adicione mais atualizações conforme necessário para cada fatia
+            editOptionsContainer.style.display = "none";
+        });
+    </script>
+</body>
+</html>
