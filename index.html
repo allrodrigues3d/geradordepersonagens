@@ -29,14 +29,13 @@
             border-radius: 50%;
             background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            overflow: hidden; /* Esconde as partes das fatias fora do círculo */
         }
         .slice {
             position: absolute;
             width: 100%;
             height: 100%;
             clip-path: polygon(50% 50%, 0 0, 100% 0);
-            transform-origin: 50% 100%; /* Define o ponto de rotação no centro da base do triângulo */
+            transform-origin: 50% 100%;
         }
         .button-container {
             display: flex;
@@ -115,11 +114,18 @@
             roulette.appendChild(slice);
         }
 
+        let spinning = false;
+
         // Função para girar a roleta
         function spinRoulette() {
+            if (spinning) return;
+            spinning = true;
             const randomAngle = Math.floor(Math.random() * numSlices) * (360 / numSlices);
             roulette.style.transition = "transform 3s ease-out";
             roulette.style.transform = `rotate(${randomAngle + 720}deg)`; // Gira pelo menos 2 voltas antes de parar
+            setTimeout(() => {
+                spinning = false;
+            }, 3000); // Permite girar novamente após 3 segundos
         }
 
         // Evento de clique no botão "ROLAR"
