@@ -1,3 +1,6 @@
+Peço desculpas pela confusão anterior. Parece que houve um problema com a minha resposta anterior. Aqui está o código corrigido:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,13 +32,13 @@
             border-radius: 50%;
             background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            overflow: hidden; /* Esconde as partes das fatias fora do círculo */
         }
         .slice {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 0;
+            height: 0;
             clip-path: polygon(50% 50%, 0 0, 100% 0);
+            z-index: 1;
         }
         .button-container {
             display: flex;
@@ -74,4 +77,71 @@
     </div>
     <div class="button-container">
         <button id="spinButton">ROLAR</button>
-        <button id="
+        <button id="editButton">Editar Opções</button>
+    </div>
+    <div class="footer">Ver. 0.0.0.1</div>
+
+    <div class="edit-options-container" id="editOptionsContainer">
+        <form class="edit-options-form">
+            <h3>Edit Options</h3>
+            <div class="edit-options-input">
+                <label for="option1">Opção 1:</label>
+                <input type="text" id="option1" value="Humano">
+            </div>
+            <div class="edit-options-input">
+                <label for="option2">Opção 2:</label>
+                <input type="text" id="option2" value="Elfo">
+            </div>
+            <!-- Adicione mais opções conforme necessário -->
+            <button type="button" id="saveOptionsButton">Salvar</button>
+            <button type="button" id="cancelOptionsButton">Cancelar</button>
+        </form>
+    </div>
+
+    <script>
+        const roulette = document.getElementById("roulette");
+        const spinButton = document.getElementById("spinButton");
+        const editButton = document.getElementById("editButton");
+        const editOptionsContainer = document.getElementById("editOptionsContainer");
+        const saveOptionsButton = document.getElementById("saveOptionsButton");
+        const cancelOptionsButton = document.getElementById("cancelOptionsButton");
+        const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown", "cyan", "gray"];
+        const numSlices = colors.length;
+
+        // Cria as fatias coloridas na roleta
+        for (let i = 0; i < numSlices; i++) {
+            const slice = document.createElement("div");
+            slice.className = "slice";
+            slice.style.transform = `rotate(${(360 / numSlices) * i}deg)`;
+            slice.style.backgroundColor = colors[i];
+            roulette.appendChild(slice);
+        }
+
+        // Função para girar a roleta
+        function spinRoulette() {
+            const randomAngle = Math.floor(Math.random() * numSlices) * (360 / numSlices);
+            roulette.style.transition = "transform 3s ease-out";
+            roulette.style.transform = `rotate(${randomAngle + 720}deg)`; // Gira pelo menos 2 voltas antes de parar
+        }
+
+        // Evento de clique no botão "ROLAR"
+        spinButton.addEventListener("click", () => {
+            roulette.style.transition = "none"; // Remove a transição para evitar cliques repetidos
+            spinRoulette();
+        });
+
+        // Evento de clique no botão "Editar Opções"
+        editButton.addEventListener("click", () => {
+            editOptionsContainer.style.display = "block";
+        });
+
+        // Evento de clique no botão "Cancelar"
+        cancelOptionsButton.addEventListener("click", () => {
+            editOptionsContainer.style.display = "none";
+        });
+
+        // Evento de clique no botão "Salvar"
+        saveOptionsButton.addEventListener("click", () => {
+            const option1 = document.getElementById("option1").value;
+            const option2 = document.getElementById("option2").value;
+            // Atualize as opções nas fatias
