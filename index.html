@@ -57,6 +57,9 @@
             slice.className = "slice";
             slice.style.transform = `rotate(${angle * i}deg)`;
             slice.style.backgroundColor = colors[i];
+            slice.style.width = "50%";
+            slice.style.height = "50%";
+            slice.style.transformOrigin = "100% 100%";
             roulette.appendChild(slice);
         }
 
@@ -69,11 +72,4 @@
 
         // Evento de clique no botão "ROLAR"
         spinButton.addEventListener("click", () => {
-            roulette.style.transition = "none"; // Remove a transição para evitar cliques repetidos
-            spinRoulette();
-        });
-
-        // Evento de clique no botão "Editar Opções"
-        editButton.addEventListener("click", () => {
-            // Aqui você pode adicionar lógica para editar as opções
-            alert("Botão 'Editar Opções' clicado. Ad
+            roulette.style.transition = "none"; // Remove a transição para evitar
