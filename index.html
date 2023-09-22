@@ -14,10 +14,6 @@
             margin: 0;
             background-color: #f0f0f0;
         }
-        .roulette-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
         .title {
             font-size: 24px;
             margin-bottom: 10px;
@@ -37,73 +33,30 @@
             clip-path: polygon(50% 50%, 0 0, 100% 0);
             transform-origin: 50% 100%;
         }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
         button {
             padding: 10px 20px;
             font-size: 16px;
+            margin-top: 20px;
         }
         .footer {
             font-size: 12px;
-        }
-        .edit-options-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .edit-options-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .edit-options-input {
-            margin: 5px 0;
         }
     </style>
 </head>
 <body>
     <div class="title">RAÇA</div>
-    <div class="roulette-container">
-        <div class="roulette" id="roulette">
-            <!-- Fatias da roleta -->
-        </div>
+    <div class="roulette" id="roulette">
+        <!-- Fatias da roleta -->
     </div>
-    <div class="button-container">
-        <button id="spinButton">ROLAR</button>
-        <button id="editButton">Editar Opções</button>
-    </div>
+    <button id="spinButton">ROLAR</button>
     <div class="footer">Ver. 0.0.0.1</div>
-
-    <div class="edit-options-container" id="editOptionsContainer">
-        <form class="edit-options-form">
-            <h3>Edit Options</h3>
-            <div class="edit-options-input">
-                <label for="option1">Opção 1:</label>
-                <input type="text" id="option1" value="Humano">
-            </div>
-            <div class="edit-options-input">
-                <label for="option2">Opção 2:</label>
-                <input type="text" id="option2" value="Elfo">
-            </div>
-            <!-- Adicione mais opções conforme necessário -->
-            <button type="button" id="saveOptionsButton">Salvar</button>
-            <button type="button" id="cancelOptionsButton">Cancelar</button>
-        </form>
-    </div>
 
     <script>
         const roulette = document.getElementById("roulette");
         const spinButton = document.getElementById("spinButton");
-        const editButton = document.getElementById("editButton");
-        const editOptionsContainer = document.getElementById("editOptionsContainer");
-        const saveOptionsButton = document.getElementById("saveOptionsButton");
-        const cancelOptionsButton = document.getElementById("cancelOptionsButton");
         const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown", "cyan", "gray"];
         const numSlices = colors.length;
+        let spinning = false;
 
         // Cria as fatias coloridas na roleta
         for (let i = 0; i < numSlices; i++) {
@@ -113,8 +66,6 @@
             slice.style.backgroundColor = colors[i];
             roulette.appendChild(slice);
         }
-
-        let spinning = false;
 
         // Função para girar a roleta
         function spinRoulette() {
@@ -132,28 +83,6 @@
         spinButton.addEventListener("click", () => {
             roulette.style.transition = "none"; // Remove a transição para evitar cliques repetidos
             spinRoulette();
-        });
-
-        // Evento de clique no botão "Editar Opções"
-        editButton.addEventListener("click", () => {
-            editOptionsContainer.style.display = "block";
-        });
-
-        // Evento de clique no botão "Cancelar"
-        cancelOptionsButton.addEventListener("click", () => {
-            editOptionsContainer.style.display = "none";
-        });
-
-        // Evento de clique no botão "Salvar"
-        saveOptionsButton.addEventListener("click", () => {
-            const option1 = document.getElementById("option1").value;
-            const option2 = document.getElementById("option2").value;
-            // Atualize as opções nas fatias da roleta
-            const slices = document.querySelectorAll(".slice");
-            slices[0].textContent = option1;
-            slices[1].textContent = option2;
-            // Adicione mais atualizações conforme necessário para cada fatia
-            editOptionsContainer.style.display = "none";
         });
     </script>
 </body>
