@@ -32,15 +32,25 @@
             clip-path: polygon(50% 50%, 0 0, 100% 0);
             z-index: 1;
         }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .footer {
+            font-size: 12px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="roulette-container">
+        <div class="title">RAÇA</div>
         <div class="roulette" id="roulette">
             <!-- Fatias da roleta -->
         </div>
         <button id="spinButton">ROLAR</button>
         <button id="editButton">Editar Opções</button>
+        <div class="footer">Ver. 0.0.0.1</div>
     </div>
 
     <script>
@@ -72,4 +82,15 @@
 
         // Evento de clique no botão "ROLAR"
         spinButton.addEventListener("click", () => {
-            roulette.style.transition = "none"; // Remove a transição para evitar
+            roulette.style.transition = "none"; // Remove a transição para evitar cliques repetidos
+            spinRoulette();
+        });
+
+        // Evento de clique no botão "Editar Opções"
+        editButton.addEventListener("click", () => {
+            // Aqui você pode adicionar lógica para editar as opções
+            alert("Botão 'Editar Opções' clicado. Adicione sua lógica aqui.");
+        });
+    </script>
+</body>
+</html>
