@@ -1,26 +1,26 @@
-// Array para armazenar as opções
-let options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const roulette = document.getElementById("roulette");
+const spinButton = document.getElementById("spinButton");
+const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+const numSlices = colors.length;
 
-// Função para exibir as opções na página
-function displayOptions() {
-    const optionsDiv = document.getElementById("options");
-    optionsDiv.innerHTML = options.map(option => `<p>${option}</p>`).join("");
+// Cria as fatias coloridas na roleta
+for (let i = 0; i < numSlices; i++) {
+    const slice = document.createElement("div");
+    slice.className = "slice";
+    slice.style.transform = `rotate(${(360 / numSlices) * i}deg)`;
+    slice.style.backgroundColor = colors[i];
+    roulette.appendChild(slice);
 }
 
-// Função para abrir a caixa de diálogo de edição de opções
-document.getElementById("editButton").addEventListener("click", () => {
-    const newOptions = prompt("Digite as novas opções separadas por vírgula (ex: 11, 12, 13):");
-    if (newOptions !== null) {
-        options = newOptions.split(",").map(option => parseInt(option.trim(), 10));
-        displayOptions();
-    }
-});
+// Função para girar a roleta
+function spinRoulette() {
+    const randomAngle = Math.floor(Math.random() * 3600) + 1800; // Gira pelo menos 5 voltas
+    roulette.style.transition = "transform 3s ease-out";
+    roulette.style.transform = `rotate(${randomAngle}deg)`;
+}
 
-// Função para rolar a roleta
-document.getElementById("spinButton").addEventListener("click", () => {
-    const result = options[Math.floor(Math.random() * options.length)];
-    alert(`Opção selecionada: ${result}`);
+// Adiciona evento de clique ao botão "ROLAR"
+spinButton.addEventListener("click", () => {
+    roulette.style.transition = "none"; // Remove a transição para evitar cliques repetidos
+    spinRoulette();
 });
-
-// Exibir as opções iniciais na página
-displayOptions();
