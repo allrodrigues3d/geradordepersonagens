@@ -49,6 +49,20 @@
         .footer {
             font-size: 12px;
         }
+        .edit-options-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .edit-options-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .edit-options-input {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -64,11 +78,31 @@
     </div>
     <div class="footer">Ver. 0.0.0.1</div>
 
+    <div class="edit-options-container" id="editOptionsContainer">
+        <form class="edit-options-form">
+            <h3>Edit Options</h3>
+            <div class="edit-options-input">
+                <label for="option1">Opção 1:</label>
+                <input type="text" id="option1" value="Humano">
+            </div>
+            <div class="edit-options-input">
+                <label for="option2">Opção 2:</label>
+                <input type="text" id="option2" value="Elfo">
+            </div>
+            <!-- Adicione mais opções conforme necessário -->
+            <button type="button" id="saveOptionsButton">Salvar</button>
+            <button type="button" id="cancelOptionsButton">Cancelar</button>
+        </form>
+    </div>
+
     <script>
         const roulette = document.getElementById("roulette");
         const spinButton = document.getElementById("spinButton");
         const editButton = document.getElementById("editButton");
-        const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+        const editOptionsContainer = document.getElementById("editOptionsContainer");
+        const saveOptionsButton = document.getElementById("saveOptionsButton");
+        const cancelOptionsButton = document.getElementById("cancelOptionsButton");
+        const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown", "cyan", "gray"];
         const numSlices = colors.length;
 
         // Cria as fatias coloridas na roleta e ajusta a rotação para parar em uma fatia
@@ -98,8 +132,21 @@
 
         // Evento de clique no botão "Editar Opções"
         editButton.addEventListener("click", () => {
-            // Aqui você pode adicionar lógica para editar as opções
-            alert("Botão 'Editar Opções' clicado. Adicione sua lógica aqui.");
+            editOptionsContainer.style.display = "block";
+        });
+
+        // Evento de clique no botão "Cancelar"
+        cancelOptionsButton.addEventListener("click", () => {
+            editOptionsContainer.style.display = "none";
+        });
+
+        // Evento de clique no botão "Salvar"
+        saveOptionsButton.addEventListener("click", () => {
+            const option1 = document.getElementById("option1").value;
+            const option2 = document.getElementById("option2").value;
+            // Atualize as opções em cada fatia aqui
+            alert(`Opção 1: ${option1}, Opção 2: ${option2}`);
+            editOptionsContainer.style.display = "none";
         });
     </script>
 </body>
